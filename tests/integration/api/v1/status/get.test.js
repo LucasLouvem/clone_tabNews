@@ -14,7 +14,7 @@ test("get to /api/v1/status should return 200", async () => {
   const parsedUpdateAt = new Date(responseBody.update_at).toISOString();
   expect(responseBody.update_at).toEqual(parsedUpdateAt);
 
-  expect(responseBody.version).toEqual(20.0);
+  expect(responseBody.version).toEqual(16.0);
   expect(responseBody.max_connections).toEqual(100);
   expect(responseBody.opened_connections).toEqual(1);
 });
