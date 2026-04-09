@@ -1,6 +1,7 @@
 name: Automatically run tests
+
 on: pull_request:
-  branches: [main]
+
 jobs:
   jest:
     name: Jest Ubuntu
