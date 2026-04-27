@@ -20,6 +20,7 @@ Aqui estão os projetos que construí durante o curso:
 ### 📂 Lista de Projetos
 
 1. Clone_tabNews
+
    - Site modelo utilizado para o `curso.dev`
    - Tecnologias: JavaScript, Node.js, etc.
    - [Site Projeto do Curso](https://clone-tab-news-liard-ten.vercel.app/)
