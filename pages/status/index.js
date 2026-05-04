@@ -1,13 +1,13 @@
 import useSWR from "swr";
 
-async function fectchAPI(key) {
-  const reponse = await fetch(key);
-  const responseBody = await reponse.json();
+async function fetchAPI(key) {
+  const response = await fetch(key);
+  const responseBody = await response.json();
   return responseBody;
 }
 
 export default function StatusPage() {
-  const { data, error, isLoading } = useSWR("/api/v1/status", fectchAPI, {
+  const { data, error, isLoading } = useSWR("/api/v1/status", fetchAPI, {
     refreshInterval: 2000,
   });
 
