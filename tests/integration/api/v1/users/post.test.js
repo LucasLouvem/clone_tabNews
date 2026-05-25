@@ -109,7 +109,6 @@ describe("POST /api/v1/users", () => {
       expect(response2.status).toBe(400);
 
       const response2Body = await response2.json();
-      console.log(response2Body);
 
       expect(response2Body).toEqual({
         name: "ValidationError",
