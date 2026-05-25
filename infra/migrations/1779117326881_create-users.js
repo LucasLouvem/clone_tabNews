@@ -16,20 +16,22 @@ exports.up = (pgm) => {
       notNull: true,
       unique: true,
     },
-    // Why 72 char? https://security.stackexchange.com/questions/39849/does-bcrypt-have-a-maximum-password-length/39851#39851
+    // Why 60 char? https://www.npmjs.com/package/bcrypt#hash-info
     password: {
-      type: "varchar(72)",
+      type: "varchar(60)",
       notNull: true,
     },
     //Why timestamp with TimeZone? https://justatheory.com/2012/04/postgres-use-timestamptz/
     created_at: {
       type: "timestamptz",
-      default: pgm.func("now()"),
+      notNull: true,
+      default: pgm.func("timezone('utc', now())"),
     },
 
     updated_at: {
       type: "timestamptz",
-      default: pgm.func("now()"),
+      notNull: true,
+      default: pgm.func("timezone('utc', now())"),
     },
   });
 };
