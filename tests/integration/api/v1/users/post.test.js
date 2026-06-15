@@ -78,7 +78,7 @@ describe("POST /api/v1/users", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "usuario2",
+          username: "usuario4",
           email: "usuario2@teste.com",
           password: "abc123",
         }),
@@ -91,7 +91,7 @@ describe("POST /api/v1/users", () => {
       expect(response2Body).toEqual({
         name: "ValidationError",
         message: "O email informado já está sendo utilizado",
-        action: "Utilize outro email para realizar o cadastro",
+        action: "Utilize outro email para realizar está operação",
         status_code: 400,
       });
     });
