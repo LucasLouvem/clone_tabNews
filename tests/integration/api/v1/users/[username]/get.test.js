@@ -10,27 +10,19 @@ beforeAll(async () => {
 describe("GET /api/v1/users/[username]", () => {
   describe("anonymous user", () => {
     test("With exact case match", async () => {
-      const response = await fetch("http://localhost:3000/api/v1/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: "MesmoCase",
-          email: "mesmo.case@teste.com",
-          password: "senha123",
-        }),
+      await orchestrator.createUser({
+        username: "MesmoCase",
+        email: "mesmo.case@teste.com",
+        password: "senha123",
       });
 
-      expect(response.status).toBe(201);
-
-      const response1 = await fetch(
+      const response = await fetch(
         "http://localhost:3000/api/v1/users/MesmoCase",
       );
 
-      expect(response1.status).toBe(200);
+      expect(response.status).toBe(200);
 
-      const responseBody = await response1.json();
+      const responseBody = await response.json();
 
       expect(responseBody).toEqual({
         id: responseBody.id,
@@ -47,27 +39,19 @@ describe("GET /api/v1/users/[username]", () => {
     });
 
     test("With case mismatch", async () => {
-      const response = await fetch("http://localhost:3000/api/v1/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: "CaseDiferente",
-          email: "case.diferente@teste.com",
-          password: "senha123",
-        }),
+      await orchestrator.createUser({
+        username: "CaseDiferente",
+        email: "case.diferente@teste.com",
+        password: "senha123",
       });
 
-      expect(response.status).toBe(201);
-
-      const response1 = await fetch(
+      const response = await fetch(
         "http://localhost:3000/api/v1/users/casediferente",
       );
 
-      expect(response1.status).toBe(200);
+      expect(response.status).toBe(200);
 
-      const responseBody = await response1.json();
+      const responseBody = await response.json();
 
       expect(responseBody).toEqual({
         id: responseBody.id,
