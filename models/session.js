@@ -90,11 +90,36 @@ async function renewSession(sessionId) {
   }
 }
 
+async function expireById(sessionId) {
+  const expiredSession = await runUpdateQuery(sessionId);
+  return expiredSession;
+
+  async function runUpdateQuery(sessionId) {
+    const result = await database.query({
+      text: `
+        UPDATE 
+          sessions
+        SET 
+          expires_at = expires_at - INTERVAL '1 year',
+          updated_at = NOW()
+        WHERE 
+          id = $1
+        RETURNING 
+          *
+        ;`,
+      values: [sessionId],
+    });
+
+    return result.rows[0];
+  }
+}
+
 const session = {
   createSession,
   EXPIRATION_TIME,
   FindOneValidByToken,
   renewSession,
+  expireById,
 };
 
 export default session;
