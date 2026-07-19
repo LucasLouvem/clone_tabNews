@@ -62,8 +62,6 @@ describe("GET /api/v1/user", () => {
         map: true,
       });
 
-      console.log("parsedSetCookie:", parsedSetCookie);
-
       expect(parsedSetCookie.sessionId).toEqual({
         name: "sessionId",
         value: renewedSessionObject.token,
@@ -127,8 +125,6 @@ describe("GET /api/v1/user", () => {
         map: true,
       });
 
-      console.log("parsedSetCookie:", parsedSetCookie);
-
       expect(parsedSetCookie.sessionId).toEqual({
         name: "sessionId",
         value: renewedSessionObject.token,
@@ -157,6 +153,19 @@ describe("GET /api/v1/user", () => {
         message: "Usuário não possui sessão ativa.",
         action: "Verifique se o usuário está logado e tente novamente.",
         status_code: 401,
+      });
+
+      // Set-cookie assertion
+      const parsedSetCookie = setCookieParser(response, {
+        map: true,
+      });
+
+      expect(parsedSetCookie.session_id).toEqual({
+        name: "session_id",
+        value: "invalid",
+        maxAge: -1,
+        path: "/",
+        httpOnly: true,
       });
     });
 
@@ -188,6 +197,19 @@ describe("GET /api/v1/user", () => {
         message: "Usuário não possui sessão ativa.",
         action: "Verifique se o usuário está logado e tente novamente.",
         status_code: 401,
+      });
+
+      // Set-cookie assertion
+      const parsedSetCookie = setCookieParser(response, {
+        map: true,
+      });
+
+      expect(parsedSetCookie.session_id).toEqual({
+        name: "session_id",
+        value: "invalid",
+        maxAge: -1,
+        path: "/",
+        httpOnly: true,
       });
     });
   });
